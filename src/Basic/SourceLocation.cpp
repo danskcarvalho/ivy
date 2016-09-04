@@ -1,4 +1,4 @@
-//===- Diagnostics/DiagMessage.cpp - Diagnostic Message Definition --------===//
+//===- SourceLocation.cpp - Source Location -------------------------------===//
 //
 //                               Ivy Compiler
 //
@@ -7,6 +7,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include "Diagnostics/DiagMessage.h"
+#include "Basic/SourceLocation.h"
 
 using namespace ivy;
+
+const UInt32 SourceLocation::NoSourceId = (UInt32)-1;
+
