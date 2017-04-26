@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{AA417A9C-5C4A-4959-8B1E-0F342062C3B6}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ivyc</RootNamespace>
+    <AssemblyName>ivyc</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="LLVMSharp">
+      <HintPath>..\libs\LLVMSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Basic\SourceLocation.cs" />
+    <Compile Include="Basic\ModuleName.cs" />
+    <Compile Include="Basic\Name.cs" />
+    <Compile Include="Basic\OperatorName.cs" />
+    <Compile Include="Basic\Number.cs" />
+    <Compile Include="Basic\NumberOperations.cs" />
+    <Compile Include="AST\Node.cs" />
+    <Compile Include="AST\Kinds\ClassKindExpressionNode.cs" />
+    <Compile Include="AST\Kinds\ConstructorKindExpressionASTNode.cs" />
+    <Compile Include="AST\Kinds\KindExpressionNode.cs" />
+    <Compile Include="AST\Kinds\SimpleKindExpressionNode.cs" />
+    <Compile Include="AST\Types\DotTypeExpressionNode.cs" />
+    <Compile Include="AST\Types\FunctionTypeExpressionASTNode.cs" />
+    <Compile Include="AST\Types\NullableTypeExpressionNode.cs" />
+    <Compile Include="AST\Types\PointerTypeExpressionNode.cs" />
+    <Compile Include="AST\Types\PolyTypeExpressionNode.cs" />
+    <Compile Include="AST\Types\TupleTypeExpressionNode.cs" />
+    <Compile Include="AST\Types\TypeExpressionNode.cs" />
+    <Compile Include="AST\Types\TypeNameExpressionNode.cs" />
+    <Compile Include="AST\Types\KnownTypeAliases.cs" />
+    <Compile Include="AST\Types\AnnotatedTypeExpressionNode.cs" />
+    <Compile Include="AST\Expressions\BinaryExpressionNode.cs" />
+    <Compile Include="AST\Expressions\BinaryTypeExpressionNode.cs" />
+    <Compile Include="AST\Expressions\ConditionalExpressionNode.cs" />
+    <Compile Include="AST\Expressions\ExpressionNode.cs" />
+    <Compile Include="AST\Expressions\IntrinsicTypeFunctionExpressionNode.cs" />
+    <Compile Include="AST\Expressions\NameExpressionASTNode.cs" />
+    <Compile Include="AST\Expressions\NewExpressionNode.cs" />
+    <Compile Include="AST\Expressions\PrimitiveLiteralNode.cs" />
+    <Compile Include="AST\Expressions\TryExpressionNode.cs" />
+    <Compile Include="AST\Expressions\UnaryExpressionNode.cs" />
+    <Compile Include="AST\Expressions\TupleExpressionNode.cs" />
+    <Compile Include="AST\Expressions\StringInterpolationExpressionNode.cs" />
+    <Compile Include="AST\Patterns\ConstructorPatternNode.cs" />
+    <Compile Include="AST\Patterns\PatternNode.cs" />
+    <Compile Include="AST\Patterns\PointerPatternNode.cs" />
+    <Compile Include="AST\Patterns\ExpressionPatternNode.cs" />
+    <Compile Include="AST\Patterns\SimplePatternNode.cs" />
+    <Compile Include="AST\Patterns\StructPatternNode.cs" />
+    <Compile Include="AST\Patterns\TuplePatternNode.cs" />
+    <Compile Include="AST\Patterns\WildcardPatternNode.cs" />
+    <Compile Include="AST\Expressions\StructExpression.cs" />
+    <Compile Include="AST\Expressions\IsOperatorExpressionNode.cs" />
+    <Compile Include="AST\Expressions\LambdaExpressionNode.cs" />
+    <Compile Include="AST\Expressions\ExecuteAndReturnExpressionNode.cs" />
+    <Compile Include="AST\Statements\AssertStatementNode.cs" />
+    <Compile Include="AST\Statements\DeferStatementNode.cs" />
+    <Compile Include="AST\Statements\ExpressionStatementNode.cs" />
+    <Compile Include="AST\Statements\ForeachStatementNode.cs" />
+    <Compile Include="AST\Statements\ForStatementNode.cs" />
+    <Compile Include="AST\Statements\IfStatementNode.cs" />
+    <Compile Include="AST\Statements\JumpStatementNode.cs" />
+    <Compile Include="AST\Statements\LabelStatementNode.cs" />
+    <Compile Include="AST\Statements\StatementNode.cs" />
+    <Compile Include="AST\Statements\SwitchStatementNode.cs" />
+    <Compile Include="AST\Statements\TryStatementNode.cs" />
+    <Compile Include="AST\Statements\UsingStatementNode.cs" />
+    <Compile Include="AST\Statements\VarStatementNode.cs" />
+    <Compile Include="AST\Statements\WhileStatementNode.cs" />
+    <Compile Include="AST\Declarations\ClassDeclarationNode.cs" />
+    <Compile Include="AST\Declarations\DataDeclarationNode.cs" />
+    <Compile Include="AST\Declarations\DeclarationAnnotation.cs" />
+    <Compile Include="AST\Declarations\DeclarationNode.cs" />
+    <Compile Include="AST\Declarations\DeclarationBodyNode.cs" />
+    <Compile Include="AST\Declarations\ExtensionDeclarationNode.cs" />
+    <Compile Include="AST\Declarations\FunctionDeclarationNode.cs" />
+    <Compile Include="AST\Declarations\ImportDeclarationNode.cs" />
+    <Compile Include="AST\Declarations\InstanceDeclarationNode.cs" />
+    <Compile Include="AST\Declarations\ModuleDeclarationNode.cs" />
+    <Compile Include="AST\Declarations\SpecializationDeclarationNode.cs" />
+    <Compile Include="AST\Declarations\StatementDeclarationNode.cs" />
+    <Compile Include="AST\Declarations\TypeDeclarationNode.cs" />
+    <Compile Include="AST\CompilationUnitNode.cs" />
+    <Compile Include="AST\Types\AnonymousStructTypeExpressionNode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Basic\" />
+    <Folder Include="AST\" />
+    <Folder Include="AST\Kinds\" />
+    <Folder Include="AST\Types\" />
+    <Folder Include="AST\Expressions\" />
+    <Folder Include="AST\Patterns\" />
+    <Folder Include="AST\Statements\" />
+    <Folder Include="AST\Declarations\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
