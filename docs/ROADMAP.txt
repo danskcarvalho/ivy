@@ -1,0 +1,40 @@
+Ivy
+
+Protótipo
+- A idéia é que tenha o mínimo para eu começar o desenvolvimento do próprio compilador
+
+O que vou suportar?
+-Declarações (type, data (union, discrimination, struct), class, instance, extension, function, variable, import, module, specialization, statement) 
+-Default discriminator
+-Value for discriminator
+-Nullable type
+-Default array type
+-Default map type
+-Default set type
+-Simple initialization (in the order they are defined)
+-typeid, sizeof
+-lambda
+-fail
+
+O que não vou suportar? (mas planejo suportar na versão definitiva)]
+-No mixins. Ex.:
+    instance IASTNodePrintable<T> -> CPrintable<ASTNode<T>> = mixin(self.Name)
+    self.Name is of a type that is printable
+-No new declaration type.
+-Validator for discriminator. Ex.:
+    data CallingConvention = StdCall | CCall 
+            CustomCall(Index :: uint) where Index >= 2 throw EValidation("Index", "Index < 2")
+-Null propagation
+-await/yield
+-defer
+-assert introducing new variables
+-is operator (only pattern matching)
+-reflection
+-no data declaration with declaration body (will never support)
+-no string interpolation
+-no exception handling
+-goto/labels/labelled statements
+-no shapes (like Sum(int, int) -> {X :: int, Y :: int})
+-no default parameter values
+-no default type parameters
+-no #line
