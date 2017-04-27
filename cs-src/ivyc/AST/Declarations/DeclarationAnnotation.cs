@@ -77,7 +77,7 @@ namespace ivyc.AST {
 		/// </summary>
 		Equatable,
 		/// <summary>
-		/// The compiler automatically creates a instance of CComparable for this type.
+		/// The compiler automatically creates a instance of CComparable for this type. Implies Equatable.
 		/// </summary>
 		Comparable,
 		/// <summary>
@@ -107,11 +107,11 @@ namespace ivyc.AST {
 		/// </summary>
 		Movable,
 		/// <summary>
-		/// The data type has a default init function.
+		/// The data type has a default init function. If applied 
 		/// </summary>
 		DefaultInit,
 		/// <summary>
-		/// The default init function of this data type does nothing.
+		/// The default init function of this data type does nothing. The compiler generates a default init.
 		/// </summary>
 		TrivialInit,
 		/// <summary>
@@ -120,11 +120,11 @@ namespace ivyc.AST {
 		TrivialDeinit,
 		/// <summary>
 		/// Applied to global vars. Each thread has a copy of this variable. The type of the variable must have a trivial init
-		/// and trivial deinit.
+		/// and trivial deinit. Not in this prototype.
 		/// </summary>
-		ThreadLocal,
+		//ThreadLocal,
 		/// <summary>
-		/// Either the function can be accessed externally by C/C++ code. Or the function is provided externally by C/C++ code.
+		/// Either the function can be accessed externally by C/C++ code or the function is provided externally by C/C++ code.
 		/// It can have a name passed as an argument to this annotation.
 		/// </summary>
 		Extern,
@@ -157,12 +157,13 @@ namespace ivyc.AST {
 		AlwaysInline,
 		/// <summary>
 		/// Can be applied to anything. Generates a warning telling this is obsolete. Can provide a custom warning text.
+        /// Not available on the prototype.
 		/// </summary>
-		Obsolete,
+		//Obsolete,
 		/// <summary>
-		/// Generates a warning with the provided text.
+		/// Generates a warning with the provided text. Not available on the prototype.
 		/// </summary>
-		Warning,
+		//Warning,
 		/// <summary>
 		/// Applied to a named constructor. Ivy generates a init parameterless function that calls this named constructor.
 		/// </summary>
@@ -175,8 +176,9 @@ namespace ivyc.AST {
 		/// Ex.:
 		/// [excludeif("!DEBUG")]
 		/// def DebugMessage(msg :: StringView) = default
+        /// Not available in the prototype.
 		/// </summary>
-		ExcludeIf,
+		//ExcludeIf,
 		/// <summary>
 		/// Generates a CWritable instance for the data declaration this annotation is applied to.
 		/// </summary>
@@ -194,7 +196,7 @@ namespace ivyc.AST {
 		/// </summary>
 		NullType,
 		/// <summary>
-		/// Applied to a global const var of type void*. Has one required parameter. It embbeds the path of the file passed
+		/// Applied to a global let of type const void*. Has one required parameter. It embbeds the path of the file passed
 		/// into this module. The global var points to the contents of this file.
 		/// </summary>
 		Resource

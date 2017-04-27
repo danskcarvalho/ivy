@@ -38,8 +38,9 @@ namespace ivyc.AST {
 		/// Custom Attributes on this declaration. A custom attribute can be any expression. It's evaluated on the
 		/// context of a global expression (ie. only has access to global variables). A custom attribute is compiled
 		/// into a function. This function can be returned with reflection.
+        /// Not available on the prototype.
 		/// </summary>
-		public IReadOnlyList<ExpressionNode> CustomAttributes { get; private set; }
+		//public IReadOnlyList<ExpressionNode> CustomAttributes { get; private set; }
 		/// <summary>
 		/// Annotations on this declaration. Annotations are compiler defined attributes that change the way the compiler
 		/// compiles the declaration. For instance, the packed annotation changes the alignment of data fields.

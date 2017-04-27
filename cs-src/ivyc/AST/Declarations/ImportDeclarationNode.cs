@@ -5,16 +5,28 @@ namespace ivyc.AST {
 	public abstract class ImportDirectiveNode : Node {
 		
 	}
+    /// <summary>
+    /// Ex.: *
+    /// </summary>
 	public class ImportAllDirectiveNode : ImportDirectiveNode {
 		
 	}
+    /// <summary>
+    /// Ex.: Name
+    /// </summary>
 	public class ImportNameDirectiveNode : ImportDirectiveNode {
 		public Name Name { get; private set; }
 	}
+    /// <summary>
+    /// Ex.: SomeName => AnotherName
+    /// </summary>
 	public class ImportAliasedNameDirectiveNode : ImportDirectiveNode {
 		public string Alias { get; private set; }
 		public Name Aliased { get; private set; }
 	}
+    /// <summary>
+    /// Ex.: * => Sys:*
+    /// </summary>
 	public class ImportNamespacedDirectiveNode : ImportDirectiveNode {
 		public string Namespace { get; private set; }
 	}
