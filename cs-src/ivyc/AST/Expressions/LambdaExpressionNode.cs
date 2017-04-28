@@ -14,7 +14,7 @@ namespace ivyc.AST {
 		public ExpressionNode ExpressionBody { get; private set; }
 		public IReadOnlyList<StatementNode> Statements { get; private set; }
 	}
-	public enum LambdaCaptures {
+	public enum LambdaCaptureKind {
 		ByValue,
 		ByRef
 	}
@@ -23,14 +23,14 @@ namespace ivyc.AST {
 			
 		}
 
-		public LambdaCaptures Captured { get; private set; }
+		public LambdaCaptureKind Kind { get; private set; }
 		public string VarName { get; private set; }
 	}
 	public class LambdaCapturesNode : Node {
 		private LambdaCapturesNode(){
 			
 		}
-		public LambdaCaptures? AllReferenced { get; private set; }
+		public LambdaCaptureKind? AllReferenced { get; private set; }
 		public IReadOnlyList<LambdaCapturedVarNode> CapturedVars { get; private set; }
 	}
 	public class LambdaArgumentNode : Node {
@@ -39,7 +39,7 @@ namespace ivyc.AST {
 		}
 
 		public string Name { get; private set; }
-		public bool IsConst { get; private set; }
+		public bool IsLet { get; private set; }
 		public bool IsVolatile { get; private set; }
 		public RefKind Ref { get; private set; }
 		public TypeExpressionNode Type { get; private set; }
@@ -49,7 +49,7 @@ namespace ivyc.AST {
 
 		}
 
-		public bool IsConst { get; private set; }
+		public bool IsLet { get; private set; }
 		public bool IsVolatile { get; private set; }
 		public RefKind Ref { get; private set; }
 		public TypeExpressionNode Type { get; private set; }
@@ -64,6 +64,9 @@ namespace ivyc.AST {
 		public string Name { get; private set; }
 		public LambdaBodyNode Body { get; private set; }
 		public LambdaCapturesNode Captures { get; private set; }
-		public bool Throws { get; private set; }
+		//not supported in prototype
+		//public bool IsAsync { get; set; }
+		//not supported in prototype
+		//public bool Throws { get; private set; }
 	}
 }

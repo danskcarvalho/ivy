@@ -11,8 +11,9 @@ namespace ivyc.AST {
 		PreDec,
 		PostInc,
 		PostDec,
-		Await,
-		NullPropagation
+		//Not supported in prototype
+		//Await,
+		//NullPropagation
 	}
 
 	public class UnaryExpressionNode : ExpressionNode {

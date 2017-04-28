@@ -1,6 +1,7 @@
 ﻿using System;
 using ivyc.Basic;
 using System.Text.RegularExpressions;
+using System.Globalization;
 namespace ivyc.AST {
 	public enum PrimitiveLiteralKind {
 		Null,
@@ -108,7 +109,7 @@ namespace ivyc.AST {
 		}
 
 		static NumberLiteralKind GetNumberKind(string value) {
-			if (value.StartsWith("0x") || value.StartsWith("0X"))
+			if (value.StartsWith("0x", StringComparison.InvariantCulture) || value.StartsWith("0X", StringComparison.InvariantCulture))
 				return NumberLiteralKind.Hexa;
 			else if (value.Contains(".") || value.Contains("e") || value.Contains("E"))
 				return NumberLiteralKind.Float;

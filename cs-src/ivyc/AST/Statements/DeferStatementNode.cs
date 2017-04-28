@@ -3,11 +3,12 @@ using System.Collections.Generic;
 namespace ivyc.AST {
 	public enum DeferStatementKind {
 		Regular,
-		Delete,
-		Fail,
-		Throw,
-		Yield,
-		YieldBreak
+		Delete,		//defer delete expr
+		Fail,		//defer fail "should fail"
+		//not supported on prototype
+		//Throw,
+		//Yield,
+		//YieldBreak
 	}
 	public class DeferStatementNode : StatementNode {
 		private DeferStatementNode() {

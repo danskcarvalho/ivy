@@ -28,9 +28,13 @@ namespace ivyc.AST {
 		private FunctionDeclarationNode() {
 		}
 
+		public CallingConvention CallingConvention { get; private set; }
 		public Name Name { get; private set; }
 		public bool IsLet { get; private set; }
 		public bool IsVolatile { get; private set; }
+		//not supported in prototype
+		//Ex.: async def ReadFile() -> Task<List<String>>
+		//public bool IsAsync { get; set; }
 		public RefKind Ref { get; private set; }
 		public IReadOnlyList<DeclarationTypeArgumentNode> TypeArguments { get; private set; }
 		public IReadOnlyList<FunctionDeclarationArgumentNode> Arguments { get; private set; }

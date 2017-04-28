@@ -112,7 +112,7 @@ namespace ivyc.AST {
 		public bool IsVolatile { get; private set; }
 		public RefKind Ref { get; private set; }
         /// <summary>
-        /// Ex.: let Path[256] :: char
+        /// Ex.: let Path :: char[256]
         /// </summary>
 		public IReadOnlyList<ExpressionNode> Indexes { get; private set; }
 		public ExpressionNode DefaultValue { get; private set; }
@@ -122,7 +122,7 @@ namespace ivyc.AST {
 		//public IReadOnlyList<ExpressionNode> CustomAttributes { get; private set; }
 		public IReadOnlyList<DeclarationAnnotationNode> Annotations { get; private set; }
 
-		//Ex.: let Path[256] :: char
+		//Ex.: let Path :: char[256]
 	}
 
 	public class StructDeclarationBodyASTNode : DeclarationBodyNode {
@@ -137,6 +137,21 @@ namespace ivyc.AST {
 		//Ex.: data Uninitialized<T> = union { Value :: T }
 	}
 
+	public class NamedConstructorArgumentNode : Node {
+		public NamedConstructorArgumentNode(){
+			
+		}
+
+		public TypeExpressionNode Type { get; private set; }
+		public string Name { get; private set; }
+		public bool IsLet { get; private set; }
+		public bool IsVolatile { get; private set; }
+		public RefKind Ref { get; private set; }
+		//Ex.: TreeValue(char[256])
+		public IReadOnlyList<ExpressionNode> Indexes { get; private set; }
+		public ExpressionNode DefaultValue { get; private set; }
+	}
+
 	public class NamedConstructorNode : Node {
 		private NamedConstructorNode() {
 
@@ -144,21 +159,21 @@ namespace ivyc.AST {
 
 		public string Name { get; private set; }
 		public IReadOnlyList<DeclarationTypeArgumentNode> TypeArguments { get; private set; }
-		public IReadOnlyList<TypeExpressionNode> Arguments { get; private set; }
-		public ExpressionNode NumericValue { get; private set; } 
-        /// <summary>
-        /// Validation expression for the constructor
-        /// </summary>
-        public ExpressionNode WhereExpression { get; set; }
+		public IReadOnlyList<NamedConstructorArgumentNode> Arguments { get; private set; }
+		public ExpressionNode NumericValue { get; private set; }
+		/// <summary>
+		/// Validation expression for the constructor
+		/// </summary>
+		public ExpressionNode WhereExpression { get; set; }
 
-        //Not in prototype
+		//Not in prototype
 		//public IReadOnlyList<ExpressionNode> CustomAttributes { get; private set; }
 		public IReadOnlyList<DeclarationAnnotationNode> Annotations { get; private set; }
 
-        //Ex.: data Gender = Male :: 0 | Female :: 1
-        //Ex.: data CallingConvention = StdCall :: 0 | CCall :: 1
-        //                              CustomCall(Index:: uint) :: 2
-        //                                  where Index >= 2 throw EValidation("Index", "Index < 2")
+		//Ex.: data Gender = Male :: 0 | Female :: 1
+		//Ex.: data CallingConvention = StdCall :: 0 | CCall :: 1
+		//                              CustomCall(Index:: uint) :: 2
+		//                                  where Index >= 2 throw EValidation("Index", "Index < 2")
 	}
 
 	public class EnumDeclarationBodyNode : DeclarationBodyNode {

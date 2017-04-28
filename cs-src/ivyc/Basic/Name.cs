@@ -10,7 +10,7 @@ namespace ivyc.Basic {
 		Deinit,
 		New,
 		Delete,
-		Self,
+		Self
 	}
 	public struct Name : IEquatable<Name> {
 		public NameKind Kind { get; private set; }

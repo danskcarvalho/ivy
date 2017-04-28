@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 namespace ivyc.AST {
 	public enum NewBehavior {
-		Throws,		//throw if fail to allocate		(new type)
-		Fails,		//failure if cannot allocate	(new! type)
+		//Throws,	//throw if fail to allocate		(new! type)
+		Fails,		//failure if cannot allocate	(new  type)
 		Null,		//null if fail to allocate		(new? type)
 		Stack		//allocate from stack... undefined behavior if fail to allocate (stacknew type)
 	}

@@ -1,7 +1,8 @@
 ﻿using System;
 namespace ivyc.AST {
 	public enum JumpStatementKind {
-		Goto,
+		//not supported on prototype
+		//Goto,
 		Continue,
 		Break
 	}

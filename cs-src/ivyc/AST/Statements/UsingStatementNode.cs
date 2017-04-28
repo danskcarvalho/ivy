@@ -8,5 +8,6 @@ namespace ivyc.AST {
 		public PatternNode VarName { get; private set; }
 		public ExpressionNode Initialization { get; private set; }
 		public IReadOnlyList<StatementNode> Block { get; private set; }
+		public string LabelName { get; private set; }
 	}
 }

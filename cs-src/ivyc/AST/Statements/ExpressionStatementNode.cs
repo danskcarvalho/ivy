@@ -4,9 +4,10 @@ namespace ivyc.AST {
 		Execute,
 		Return,
 		Fail,
-		Throw,
-		Yield,
-		YieldBreak,
+		//not supported on prototype
+		//Throw,
+		//Yield,
+		//YieldBreak,
 		Delete
 	}
 	public class ExpressionStatementNode : StatementNode {

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 namespace ivyc.AST {
 	public enum CaseStatementKind {
 		Case = 0,
-		Throw = 1,
+		//not supported on prototype
+		//Throw = 1,
 		Fail = 2,
 		Default = 3
 	}
+	//Ex.: case Expression(a, b)
 	public class CaseStatementNode : Node {
 		private CaseStatementNode(){
 		}
@@ -20,6 +22,7 @@ namespace ivyc.AST {
 		private SwitchStatementNode() {
 		}
 
+		public string LabelName { get; private set; }
 		public ExpressionNode Target { get; private set; }
 		public IReadOnlyList<CaseStatementNode> CaseStatements { get; private set; }
 	}

@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 namespace ivyc.AST {
 	public enum AssertStatementKind {
-		Regular,
-		Enforce,
+		Regular,	//assert?
+		Enforce,	//assert
 	}
 	public enum AssertFailedResult {
 		Fail,
-		Throw,
+		//not supported
+		//Throw,
 		Return,
-		YieldBreak,
-		Yield,
+		//YieldBreak,
+		//Yield,
 		Continue,
 		Break,
-		Goto,
+		//Goto,
 		ExecuteBlock
 	}
 	public class AssertStatementNode : StatementNode {

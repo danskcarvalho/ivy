@@ -9,7 +9,7 @@ namespace ivyc.AST {
 		private ConstructorPatternNode() {
 		}
 
-		public bool IsConst { get; private set; }
+		public bool IsLet { get; private set; }
 		public bool IsVolatile { get; private set; }
 		public RefKind Ref { get; private set; }
 
@@ -21,8 +21,8 @@ namespace ivyc.AST {
 		public string Name { get; private set; }
 		public TailPosition? TailPosition { get; private set; }
 
-		//Ex.: a = sys.Some(a) :: const Nullable<int>&
-		//Ex.: const& a = sys.Some(a)
-		//where Name = a, ModuleName = sys, ConstructorName = Some, TypePatterns = [B], TypeAnnotation = Nullable<int>
+		//Ex.: a = Sys:Some(a) :: Nullable<int>
+		//Ex.: let& a = Sys:Some(b)
+		//where Name = a, ModuleName = Sys, ConstructorName = Some, TypePatterns = [], TypeAnnotation = Nullable<int>
 	}
 }

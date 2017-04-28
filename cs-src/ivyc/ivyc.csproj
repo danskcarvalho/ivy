@@ -74,7 +74,6 @@
     <Compile Include="AST\Expressions\StringInterpolationExpressionNode.cs" />
     <Compile Include="AST\Patterns\ConstructorPatternNode.cs" />
     <Compile Include="AST\Patterns\PatternNode.cs" />
-    <Compile Include="AST\Patterns\PointerPatternNode.cs" />
     <Compile Include="AST\Patterns\ExpressionPatternNode.cs" />
     <Compile Include="AST\Patterns\SimplePatternNode.cs" />
     <Compile Include="AST\Patterns\StructPatternNode.cs" />
@@ -87,8 +86,8 @@
     <Compile Include="AST\Statements\AssertStatementNode.cs" />
     <Compile Include="AST\Statements\DeferStatementNode.cs" />
     <Compile Include="AST\Statements\ExpressionStatementNode.cs" />
-    <Compile Include="AST\Statements\ForeachStatementNode.cs" />
-    <Compile Include="AST\Statements\ForStatementNode.cs" />
+    <Compile Include="AST\Statements\ForInStatementNode.cs" />
+    <Compile Include="AST\Statements\ForWhileStatementNode.cs" />
     <Compile Include="AST\Statements\IfStatementNode.cs" />
     <Compile Include="AST\Statements\JumpStatementNode.cs" />
     <Compile Include="AST\Statements\LabelStatementNode.cs" />
@@ -113,6 +112,10 @@
     <Compile Include="AST\Declarations\TypeDeclarationNode.cs" />
     <Compile Include="AST\CompilationUnitNode.cs" />
     <Compile Include="AST\Types\AnonymousStructTypeExpressionNode.cs" />
+    <Compile Include="AST\Types\AutoTypeExpressionNode.cs" />
+    <Compile Include="AST\Types\ListTypeExpressionNode.cs" />
+    <Compile Include="AST\Types\MapTypeExpressionNode.cs" />
+    <Compile Include="AST\Types\SetTypeExpressionNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Basic\" />

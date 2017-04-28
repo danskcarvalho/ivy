@@ -1,5 +1,6 @@
 ﻿using System;
 namespace ivyc.AST {
+	//Ex.: let Index = 10
 	public class VarStatementNode : StatementNode {
 		private VarStatementNode() {
 		}

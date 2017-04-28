@@ -5,6 +5,9 @@ namespace ivyc.AST {
 		}
 
 		public ExpressionNode Left { get; private set; }
-		public PatternNode Pattern { get; private set; }
+		//not supported in prototype
+		//public PatternNode Pattern { get; private set; }
+		//instead at the moment...
+		public TypeExpressionNode Type { get; set; }
 	}
 }
