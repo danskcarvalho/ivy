@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace ivyc.AST {
 	/// <summary>
 	/// The body of a declaration.
 	/// </summary>
 	public abstract class DeclarationBodyNode : Node {
-		protected DeclarationBodyNode() {
+		public DeclarationBodyNode(Basic.SourceLocation location) : base(location) {
 		}
 	}
 
@@ -14,8 +15,7 @@ namespace ivyc.AST {
     /// Ex.: def MyFunction() -> void = default
 	/// </summary>
 	public class DefaultDeclarationBodyNode : DeclarationBodyNode {
-		private DefaultDeclarationBodyNode() {
-
+		public DefaultDeclarationBodyNode(Basic.SourceLocation location) : base(location) {
 		}
 	}
 
@@ -33,8 +33,9 @@ namespace ivyc.AST {
 	//}
 
 	public class DeclarationTypeArgumentNode : Node {
-		private DeclarationTypeArgumentNode() {
-
+		public DeclarationTypeArgumentNode(Basic.SourceLocation location, string name, KindExpressionNode kind) : base(location) {
+			Name = name;
+			Kind = kind;
 		}
 
 		public string Name { get; private set; }
@@ -42,8 +43,9 @@ namespace ivyc.AST {
 	}
 
 	public class NewDeclarationBodyNode : DeclarationBodyNode {
-		private NewDeclarationBodyNode() {
-
+		public NewDeclarationBodyNode(Basic.SourceLocation location, IEnumerable<DeclarationTypeArgumentNode> arguments, TypeExpressionNode target) : base(location) {
+			Arguments = arguments?.ToList().AsReadOnly();
+			Target = target;
 		}
 
 		public IReadOnlyList<DeclarationTypeArgumentNode> Arguments { get; private set; }
@@ -55,8 +57,8 @@ namespace ivyc.AST {
     /// Ex.: def Sum(A :: uint, B :: uint) -> uint => A + B
     /// </summary>
 	public class ExpressionBodyNode : DeclarationBodyNode {
-		private ExpressionBodyNode() {
-
+		public ExpressionBodyNode(Basic.SourceLocation location, ExpressionNode expression) : base(location) {
+			Expression = expression;
 		}
 
 		public ExpressionNode Expression { get; private set; }
@@ -67,8 +69,8 @@ namespace ivyc.AST {
     /// Ex.: type SoundBit = bool
     /// </summary>
 	public class TypeBodyNode : DeclarationBodyNode {
-		private TypeBodyNode() {
-
+		public TypeBodyNode(Basic.SourceLocation location, TypeExpressionNode type) : base(location) {
+			Type = type;
 		}
 
 		public TypeExpressionNode Type { get; private set; }
@@ -83,8 +85,8 @@ namespace ivyc.AST {
     ///         return null
     /// </summary>
 	public class StatementListBodyNode : DeclarationBodyNode {
-		private StatementListBodyNode() {
-
+		public StatementListBodyNode(Basic.SourceLocation location, IEnumerable<StatementNode> statements) : base(location) {
+			Statements = statements?.ToList().AsReadOnly();
 		}
 
 		public IReadOnlyList<StatementNode> Statements { get; private set; }
@@ -94,16 +96,24 @@ namespace ivyc.AST {
     /// Used for classes and extensions
     /// </summary>
 	public class DeclarationListBodyNode : DeclarationBodyNode {
-		private DeclarationListBodyNode() {
-
+		public DeclarationListBodyNode(Basic.SourceLocation location, IEnumerable<DeclarationNode> declarations) : base(location) {
+			Declarations = declarations?.ToList().AsReadOnly();
 		}
 
 		public IReadOnlyList<DeclarationNode> Declarations { get; private set; }
 	}
 
 	public class StructFieldDeclarationNode : Node {
-		private StructFieldDeclarationNode(){
-			
+		public StructFieldDeclarationNode(Basic.SourceLocation location, string name, TypeExpressionNode type, bool isLet, bool isVolatile, RefKind @ref, IEnumerable<ExpressionNode> indexes, ExpressionNode defaultValue, DeclarationAccessibility accessibility, IEnumerable<DeclarationAnnotationNode> annotations) : base(location) {
+			Name = name;
+			Type = type;
+			IsLet = isLet;
+			IsVolatile = isVolatile;
+			this.Ref = @ref;
+			Indexes = indexes?.ToList().AsReadOnly();
+			DefaultValue = defaultValue;
+			Accessibility = accessibility;
+			Annotations = annotations?.ToList().AsReadOnly();
 		}
 
 		public string Name { get; private set; }
@@ -125,9 +135,10 @@ namespace ivyc.AST {
 		//Ex.: let Path :: char[256]
 	}
 
-	public class StructDeclarationBodyASTNode : DeclarationBodyNode {
-		private StructDeclarationBodyASTNode(){
-			
+	public class StructDeclarationBodyNode : DeclarationBodyNode {
+		public StructDeclarationBodyNode(Basic.SourceLocation location, IEnumerable<StructFieldDeclarationNode> fields, bool isUnion) : base(location) {
+			Fields = fields?.ToList().AsReadOnly();
+			IsUnion = isUnion;
 		}
 
 		public IReadOnlyList<StructFieldDeclarationNode> Fields { get; private set; }
@@ -138,8 +149,14 @@ namespace ivyc.AST {
 	}
 
 	public class NamedConstructorArgumentNode : Node {
-		public NamedConstructorArgumentNode(){
-			
+		public NamedConstructorArgumentNode(Basic.SourceLocation location, TypeExpressionNode type, string name, bool isLet, bool isVolatile, RefKind @ref, IEnumerable<ExpressionNode> indexes, ExpressionNode defaultValue) : base(location) {
+			Type = type;
+			Name = name;
+			IsLet = isLet;
+			IsVolatile = isVolatile;
+			this.Ref = @ref;
+			Indexes = indexes?.ToList().AsReadOnly();
+			DefaultValue = defaultValue;
 		}
 
 		public TypeExpressionNode Type { get; private set; }
@@ -153,8 +170,13 @@ namespace ivyc.AST {
 	}
 
 	public class NamedConstructorNode : Node {
-		private NamedConstructorNode() {
-
+		public NamedConstructorNode(Basic.SourceLocation location, string name, IEnumerable<DeclarationTypeArgumentNode> typeArguments, IEnumerable<NamedConstructorArgumentNode> arguments, ExpressionNode numericValue, ExpressionNode whereExpression, IEnumerable<DeclarationAnnotationNode> annotations) : base(location) {
+			Name = name;
+			TypeArguments = typeArguments?.ToList().AsReadOnly();
+			Arguments = arguments?.ToList().AsReadOnly();
+			NumericValue = numericValue;
+			WhereExpression = whereExpression;
+			Annotations = annotations?.ToList().AsReadOnly();
 		}
 
 		public string Name { get; private set; }
@@ -177,8 +199,8 @@ namespace ivyc.AST {
 	}
 
 	public class EnumDeclarationBodyNode : DeclarationBodyNode {
-		private EnumDeclarationBodyNode(){
-			
+		public EnumDeclarationBodyNode(Basic.SourceLocation location, IEnumerable<NamedConstructorNode> constructors) : base(location) {
+			Constructors = constructors?.ToList().AsReadOnly();
 		}
 
 		public IReadOnlyList<NamedConstructorNode> Constructors { get; private set; }

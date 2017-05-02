@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public enum DeferStatementKind {
 		Regular,
@@ -11,7 +14,11 @@ namespace ivyc.AST {
 		//YieldBreak
 	}
 	public class DeferStatementNode : StatementNode {
-		private DeferStatementNode() {
+		public DeferStatementNode(SourceLocation location, ExpressionNode expression, IEnumerable<StatementNode> body, DeferStatementKind kind) : base(location)
+		{
+			Expression = expression;
+			Body = body?.ToList().AsReadOnly();
+			Kind = kind;
 		}
 
 		public ExpressionNode Expression { get; private set; }

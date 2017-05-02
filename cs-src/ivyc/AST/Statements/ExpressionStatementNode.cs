@@ -1,4 +1,6 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public enum ExpressionStatementKind {
 		Execute,
@@ -11,7 +13,10 @@ namespace ivyc.AST {
 		Delete
 	}
 	public class ExpressionStatementNode : StatementNode {
-		private ExpressionStatementNode() {
+		public ExpressionStatementNode(SourceLocation location, ExpressionStatementKind kind, ExpressionNode expression) : base(location)
+		{
+			Kind = kind;
+			Expression = expression;
 		}
 
 		public ExpressionStatementKind Kind { get; private set; }

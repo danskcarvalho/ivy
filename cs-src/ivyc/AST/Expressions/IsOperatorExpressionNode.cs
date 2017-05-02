@@ -1,7 +1,12 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public class IsOperatorExpressionNode : ExpressionNode {
-		private IsOperatorExpressionNode() {
+		public IsOperatorExpressionNode(SourceLocation location, ExpressionNode left, TypeExpressionNode type) : base(location)
+		{
+			Left = left;
+			Type = type;
 		}
 
 		public ExpressionNode Left { get; private set; }

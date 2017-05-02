@@ -206,8 +206,9 @@ namespace ivyc.AST {
 	/// Argument of an annotation. Can be a expression or a type.
 	/// </summary>
 	public class DeclarationAnnotationParameterNode : Node {
-		private DeclarationAnnotationParameterNode(){
-			
+		public DeclarationAnnotationParameterNode(Basic.SourceLocation location, ExpressionNode expression, TypeExpressionNode type) : base(location) {
+			Expression = expression;
+			Type = type;
 		}
 		public ExpressionNode Expression { get; private set; }
 		public TypeExpressionNode Type { get; private set; }
@@ -217,8 +218,9 @@ namespace ivyc.AST {
 	/// Declaration Annotation
 	/// </summary>
 	public class DeclarationAnnotationNode : Node {
-		private DeclarationAnnotationNode(){
-			
+		public DeclarationAnnotationNode(Basic.SourceLocation location, DeclarationAnnotationName name, IReadOnlyList<DeclarationAnnotationParameterNode> arguments) : base(location) {
+			Name = name;
+			Arguments = arguments;
 		}
 
 		/// <summary>

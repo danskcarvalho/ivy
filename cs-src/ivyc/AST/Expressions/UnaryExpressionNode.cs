@@ -1,4 +1,6 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public enum UnaryOperator {
 		Ref,	//&
@@ -17,7 +19,10 @@ namespace ivyc.AST {
 	}
 
 	public class UnaryExpressionNode : ExpressionNode {
-		private UnaryExpressionNode() {
+		public UnaryExpressionNode(SourceLocation location, ExpressionNode inner, UnaryOperator @operator) : base(location)
+		{
+			Inner = inner;
+			Operator = @operator;
 		}
 
 		public ExpressionNode Inner { get; private set; }

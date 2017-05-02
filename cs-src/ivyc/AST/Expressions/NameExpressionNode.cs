@@ -1,8 +1,11 @@
 ﻿using System;
 using ivyc.Basic;
 namespace ivyc.AST {
-	public class NameExpressionASTNode : ExpressionNode {
-		private NameExpressionASTNode() {
+	public class NameExpressionNode : ExpressionNode {
+		public NameExpressionNode(SourceLocation location, Name name, string modulePrefix) : base(location)
+		{
+			Name = name;
+			ModulePrefix = modulePrefix;
 		}
 
 		public Name Name { get; private set; }

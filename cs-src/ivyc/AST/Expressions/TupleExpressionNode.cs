@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 
 	public class TupleElementNode : Node {
-		private TupleElementNode(){
-			
+		public TupleElementNode(SourceLocation location, ExpressionNode left, ExpressionNode right) : base(location)
+		{
+			Left = left;
+			Right = right;
 		}
 
 		public ExpressionNode Left { get; private set; }
@@ -18,7 +23,10 @@ namespace ivyc.AST {
 	}
 
 	public class TupleExpressionNode : ExpressionNode {
-		private TupleExpressionNode() {
+		public TupleExpressionNode(SourceLocation location, IEnumerable<TupleElementNode> elements, TupleKind kind) : base(location)
+		{
+			Elements = elements?.ToList().AsReadOnly();
+			Kind = kind;
 		}
 
 		public IReadOnlyList<TupleElementNode> Elements { get; private set; }

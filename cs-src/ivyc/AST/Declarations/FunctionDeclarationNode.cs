@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using ivyc.Basic;
+using System.Linq;
 namespace ivyc.AST {
 
 	public class FunctionDeclarationArgumentNode : Node {
-		private FunctionDeclarationArgumentNode() {
-
+		public FunctionDeclarationArgumentNode(SourceLocation location, string name, TypeExpressionNode type, bool isLet, bool isVolatile, RefKind @ref, ExpressionNode defaultValue) : base(location) {
+			Name = name;
+			Type = type;
+			IsLet = isLet;
+			IsVolatile = isVolatile;
+			this.Ref = @ref;
+			DefaultValue = defaultValue;
 		}
 
 		public string Name { get; private set; }
@@ -16,8 +22,9 @@ namespace ivyc.AST {
 		public ExpressionNode DefaultValue { get; set; }
 	}
 	public class FunctionDeclarationWhereClauseNode : Node {
-		private FunctionDeclarationWhereClauseNode(){
-			
+		public FunctionDeclarationWhereClauseNode(SourceLocation location, string fieldName, ExpressionNode initialization) : base(location) {
+			FieldName = fieldName;
+			Initialization = initialization;
 		}
 
 		public string FieldName { get; private set; }
@@ -25,7 +32,17 @@ namespace ivyc.AST {
 	}
 
 	public class FunctionDeclarationNode : DeclarationNode {
-		private FunctionDeclarationNode() {
+		public FunctionDeclarationNode(SourceLocation location, DeclarationAccessibility accessibility, IEnumerable<DeclarationAnnotationNode> annotations, CallingConvention callingConvention, Name name, bool isLet, bool isVolatile, RefKind @ref, IEnumerable<DeclarationTypeArgumentNode> typeArguments, IEnumerable<FunctionDeclarationArgumentNode> arguments, FunctionTypeArgumentNode result, DeclarationBodyNode body, IEnumerable<FunctionDeclarationWhereClauseNode> whereClauses) : base(location, accessibility, annotations) {
+			CallingConvention = callingConvention;
+			Name = name;
+			IsLet = isLet;
+			IsVolatile = isVolatile;
+			this.Ref = @ref;
+			TypeArguments = typeArguments?.ToList().AsReadOnly();
+			Arguments = arguments?.ToList().AsReadOnly();
+			Result = result;
+			Body = body;
+			WhereClauses = whereClauses?.ToList().AsReadOnly();
 		}
 
 		public CallingConvention CallingConvention { get; private set; }

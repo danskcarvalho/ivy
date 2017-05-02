@@ -1,7 +1,13 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public class PointerTypeExpressionNode : ExpressionNode {
-		private PointerTypeExpressionNode() {
+		public PointerTypeExpressionNode(SourceLocation location, TypeExpressionNode pointee, bool isConst, bool isVolatile) : base(location)
+		{
+			Pointee = pointee;
+			IsConst = isConst;
+			IsVolatile = isVolatile;
 		}
 
 		public TypeExpressionNode Pointee { get; private set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace ivyc.AST {
 	/// <summary>
 	/// A data declaration can be used to declare a struct, a union or a enumeration.
@@ -9,9 +10,15 @@ namespace ivyc.AST {
 	/// Ex.: data Gender = M | F
 	/// </summary>
 	public class DataDeclarationNode : DeclarationNode {
-		private DataDeclarationNode() {
+		public DataDeclarationNode(Basic.SourceLocation location, 
+		                           DeclarationAccessibility accessibility, 
+		                           IEnumerable<DeclarationAnnotationNode> annotations, 
+		                           string name, IEnumerable<DeclarationTypeArgumentNode> typeArguments, 
+		                           DeclarationBodyNode body) : base(location, accessibility, annotations) {
+			Name = name;
+			TypeArguments = typeArguments?.ToList().AsReadOnly();
+			Body = body;
 		}
-
 		/// <summary>
 		/// The name of this declaration. The convention is to use UpperCammelCase.
 		/// </summary>

@@ -1,12 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public enum TailPosition {
 		AtStart,
 		AtEnd
 	}
 	public class ConstructorPatternNode : PatternNode {
-		private ConstructorPatternNode() {
+		public ConstructorPatternNode(SourceLocation location, bool isLet, bool isVolatile, RefKind @ref, string moduleName, string constructorName, IEnumerable<string> typePatterns, IEnumerable<PatternNode> valuePatterns, TypeExpressionNode typeAnnotation, string name, TailPosition? tailPosition) : base(location)
+		{
+			IsLet = isLet;
+			IsVolatile = isVolatile;
+			Ref = @ref;
+			ModuleName = moduleName;
+			ConstructorName = constructorName;
+			TypePatterns = typePatterns?.ToList().AsReadOnly();
+			ValuePatterns = valuePatterns?.ToList().AsReadOnly();
+			TypeAnnotation = typeAnnotation;
+			Name = name;
+			TailPosition = tailPosition;
 		}
 
 		public bool IsLet { get; private set; }

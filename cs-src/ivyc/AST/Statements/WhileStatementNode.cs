@@ -1,8 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public class WhileStatementNode : StatementNode {
-		private WhileStatementNode() {
+		public WhileStatementNode(SourceLocation location, string labelName, ExpressionNode condition, IEnumerable<StatementNode> block) : base(location)
+		{
+			LabelName = labelName;
+			Condition = condition;
+			Block = block?.ToList().AsReadOnly();
 		}
 
 		public string LabelName { get; private set; }

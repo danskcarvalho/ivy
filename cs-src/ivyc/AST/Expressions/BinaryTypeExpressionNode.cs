@@ -1,4 +1,6 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public enum TypeExpressionOperator {
 		Annotation,		// ::  operator
@@ -7,7 +9,11 @@ namespace ivyc.AST {
 	}
 
 	public class BinaryTypeExpressionNode : ExpressionNode {
-		private BinaryTypeExpressionNode() {
+		public BinaryTypeExpressionNode(SourceLocation location, ExpressionNode left, TypeExpressionNode type, TypeExpressionOperator @operator) : base(location)
+		{
+			Left = left;
+			Type = type;
+			Operator = @operator;
 		}
 
 		public ExpressionNode Left {

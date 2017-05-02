@@ -1,4 +1,6 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public enum SimpleKindName {
 		Star,
@@ -6,7 +8,9 @@ namespace ivyc.AST {
 	}
 
 	public class SimpleKindExpressionNode : KindExpressionNode {
-		private SimpleKindExpressionNode() {
+		public SimpleKindExpressionNode(SourceLocation location, SimpleKindName name) : base(location)
+		{
+			Name = name;
 		}
 
 		public SimpleKindName Name { get; private set; }

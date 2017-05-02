@@ -1,4 +1,6 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public enum BinaryOperator {
 		Dot,
@@ -44,7 +46,11 @@ namespace ivyc.AST {
 	}
 
 	public class BinaryExpressionNode : ExpressionNode {
-		private BinaryExpressionNode() {
+		public BinaryExpressionNode(SourceLocation location, ExpressionNode left, ExpressionNode right, BinaryOperator @operator) : base(location)
+		{
+			Left = left;
+			Right = right;
+			Operator = @operator;
 		}
 
 		public ExpressionNode Left { get; private set; }

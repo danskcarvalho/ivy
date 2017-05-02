@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace ivyc.AST {
 	/// <summary>
 	/// A class declaration. A class defines a subset of types supporting a few common opertations.
@@ -10,7 +11,17 @@ namespace ivyc.AST {
 	/// Ex.: class CCopyable<T> :: CMovable<T> 
 	/// </summary>
 	public class ClassDeclarationNode : DeclarationNode {
-		private ClassDeclarationNode() {
+		public ClassDeclarationNode(Basic.SourceLocation location, 
+		                            DeclarationAccessibility accessibility, 
+		                            IEnumerable<DeclarationAnnotationNode> annotations, 
+		                            string name, 
+		                            IEnumerable<DeclarationTypeArgumentNode> typeArguments, 
+		                            IEnumerable<TypeExpressionNode> superClasses, 
+		                            DeclarationBodyNode body) : base(location, accessibility, annotations) {
+			Name = name;
+			TypeArguments = typeArguments?.ToList().AsReadOnly();
+			SuperClasses = superClasses?.ToList().AsReadOnly();
+			Body = body;
 		}
 
 		/// <summary>

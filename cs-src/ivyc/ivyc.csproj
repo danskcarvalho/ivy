@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -65,7 +65,7 @@
     <Compile Include="AST\Expressions\ConditionalExpressionNode.cs" />
     <Compile Include="AST\Expressions\ExpressionNode.cs" />
     <Compile Include="AST\Expressions\IntrinsicTypeFunctionExpressionNode.cs" />
-    <Compile Include="AST\Expressions\NameExpressionASTNode.cs" />
+    <Compile Include="AST\Expressions\NameExpressionNode.cs" />
     <Compile Include="AST\Expressions\NewExpressionNode.cs" />
     <Compile Include="AST\Expressions\PrimitiveLiteralNode.cs" />
     <Compile Include="AST\Expressions\TryExpressionNode.cs" />
@@ -126,6 +126,7 @@
     <Folder Include="AST\Patterns\" />
     <Folder Include="AST\Statements\" />
     <Folder Include="AST\Declarations\" />
+    <Folder Include="TypeSystem" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

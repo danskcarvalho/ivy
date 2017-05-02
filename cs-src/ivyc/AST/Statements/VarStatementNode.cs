@@ -1,8 +1,13 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	//Ex.: let Index = 10
 	public class VarStatementNode : StatementNode {
-		private VarStatementNode() {
+		public VarStatementNode(SourceLocation location, PatternNode varName, ExpressionNode initialization) : base(location)
+		{
+			VarName = varName;
+			Initialization = initialization;
 		}
 
 		public PatternNode VarName { get; private set; }

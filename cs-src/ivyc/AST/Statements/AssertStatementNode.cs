@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public enum AssertStatementKind {
 		Regular,	//assert?
@@ -14,11 +17,17 @@ namespace ivyc.AST {
 		//Yield,
 		Continue,
 		Break,
-		//Goto,
+		Goto,
 		ExecuteBlock
 	}
 	public class AssertStatementNode : StatementNode {
-		private AssertStatementNode() {
+		public AssertStatementNode(SourceLocation location, ExpressionNode condition, AssertFailedResult failedResult, ExpressionNode resultExpression, string resultLabel, IEnumerable<StatementNode> resultBlock) : base(location)
+		{
+			Condition = condition;
+			FailedResult = failedResult;
+			ResultExpression = resultExpression;
+			ResultLabel = resultLabel;
+			ResultBlock = resultBlock?.ToList().AsReadOnly();
 		}
 
 		public ExpressionNode Condition { get; private set; }

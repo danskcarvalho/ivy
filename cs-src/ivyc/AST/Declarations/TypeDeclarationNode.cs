@@ -1,8 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public class TypeDeclarationNode : DeclarationNode {
-		private TypeDeclarationNode() {
+		public TypeDeclarationNode(SourceLocation location, DeclarationAccessibility accessibility, IEnumerable<DeclarationAnnotationNode> annotations, string name, IList<DeclarationTypeArgumentNode> typeArguments, KindExpressionNode result, KindExpressionNode signature, DeclarationBodyNode body) : base(location, accessibility, annotations)
+		{
+			Name = name;
+			TypeArguments = typeArguments;
+			Result = result;
+			Signature = signature;
+			Body = body;
 		}
 
 		public string Name { get; private set; }

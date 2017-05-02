@@ -1,16 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public class TupleElementPatternNode : Node {
-		private TupleElementPatternNode(){
-			
+		public TupleElementPatternNode(SourceLocation location, PatternNode left, PatternNode right) : base(location)
+		{
+			Left = left;
+			Right = right;
 		}
 
 		public PatternNode Left { get; private set; }
 		public PatternNode Right { get; private set; }
 	}
 	public class TuplePatternNode : PatternNode {
-		private TuplePatternNode() {
+		public TuplePatternNode(SourceLocation location, TupleKind tupleKind, string name, bool isLet, bool isVolatile, bool isPointer, RefKind @ref, IEnumerable<TupleElementPatternNode> innerPatterns, TypeExpressionNode typeAnnotation, TailPosition? tailPosition) : base(location)
+		{
+			TupleKind = tupleKind;
+			Name = name;
+			IsLet = isLet;
+			IsVolatile = isVolatile;
+			IsPointer = isPointer;
+			Ref = @ref;
+			InnerPatterns = innerPatterns?.ToList().AsReadOnly();
+			TypeAnnotation = typeAnnotation;
+			TailPosition = tailPosition;
 		}
 
 		public TupleKind TupleKind { get; private set; }

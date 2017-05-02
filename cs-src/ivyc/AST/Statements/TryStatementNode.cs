@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	//Ex.:
 	//try:
@@ -11,7 +14,11 @@ namespace ivyc.AST {
 	//		Out.WriteLine("some unknown error...")
 	//only fail is supported in the prototype
 	public class TryStatementNode : StatementNode {
-		private TryStatementNode() {
+		public TryStatementNode(SourceLocation location, IEnumerable<StatementNode> tryBody, IEnumerable<CaseStatementNode> catchFilterBody, IEnumerable<StatementNode> catchStmtBody) : base(location)
+		{
+			TryBody = tryBody?.ToList().AsReadOnly();
+			CatchFilterBody = catchFilterBody?.ToList().AsReadOnly();
+			CatchStmtBody = catchStmtBody?.ToList().AsReadOnly();
 		}
 
 		public IReadOnlyList<StatementNode> TryBody { get; private set; }

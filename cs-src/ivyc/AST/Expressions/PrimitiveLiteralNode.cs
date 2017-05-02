@@ -38,7 +38,7 @@ namespace ivyc.AST {
 	}
 
 	public class PrimitiveLiteralNode : ExpressionNode {
-		private PrimitiveLiteralNode() {
+		private PrimitiveLiteralNode(SourceLocation location) : base(location) {
 		}
 
 		public PrimitiveLiteralKind Kind { get; private set; }
@@ -55,18 +55,16 @@ namespace ivyc.AST {
 		public string StringValue { get; private set; }
 
 		public static PrimitiveLiteralNode Null(SourceLocation location) {
-			return new PrimitiveLiteralNode() {
+			return new PrimitiveLiteralNode(location) {
 				Kind = PrimitiveLiteralKind.Null,
-				StringValue = "null",
-				Location = location
+				StringValue = "null"
 			};
 		}
 
 		public static PrimitiveLiteralNode Boolean(SourceLocation location, bool value){
-			return new PrimitiveLiteralNode() {
+			return new PrimitiveLiteralNode(location) {
 				Kind = PrimitiveLiteralKind.Boolean,
-				StringValue = value ? "true" : "false",
-				Location = location
+				StringValue = value ? "true" : "false"
 			};
 		}
 
@@ -74,11 +72,10 @@ namespace ivyc.AST {
 			if (value == null)
 				throw new ArgumentNullException(nameof(value));
 
-			return new PrimitiveLiteralNode() {
+			return new PrimitiveLiteralNode(location) {
 				Kind = PrimitiveLiteralKind.String,
 				StringPrefix = prefix,
-				StringValue = value,
-				Location = location
+				StringValue = value
 			};
 		}
 
@@ -88,27 +85,26 @@ namespace ivyc.AST {
 
 			ValidateNumber(value);
 
-			return new PrimitiveLiteralNode() {
+			return new PrimitiveLiteralNode(location) {
 				Kind = PrimitiveLiteralKind.Number,
 				NumberSuffix = suffix,
 				StringValue = value,
-				NumberKind = GetNumberKind(value),
-				Location = location
+				NumberKind = GetNumberKind(value)
 			};
 		}
 
-		private static Regex IntegerRegex = new Regex(@"^[\+\-]?[0-9]+$");
-		private static Regex FloatRegex = new Regex(@"^[\+\-]?[0-9]+(\.[0-9]+)?([eE][\+\-]?[0-9]+)?$");
-		private static Regex HexaRegex = new Regex(@"^0[xX][0123456789abcdefABCDEF]{1, 16}$");
+		private static readonly Regex IntegerRegex = new Regex(@"^[\+\-]?[0-9]+$");
+		private static readonly Regex FloatRegex = new Regex(@"^[\+\-]?[0-9]+(\.[0-9]+)?([eE][\+\-]?[0-9]+)?$");
+		private static readonly Regex HexaRegex = new Regex(@"^0[xX][0123456789abcdefABCDEF]{1, 16}$");
 
-		static void ValidateNumber(string value) {
+		private static void ValidateNumber(string value) {
 			var isNumber = IntegerRegex.IsMatch(value) || FloatRegex.IsMatch(value) || HexaRegex.IsMatch(value);
 
 			if (!isNumber)
 				throw new ArgumentException("value is not in a valid number format", nameof(value));
 		}
 
-		static NumberLiteralKind GetNumberKind(string value) {
+		private static NumberLiteralKind GetNumberKind(string value) {
 			if (value.StartsWith("0x", StringComparison.InvariantCulture) || value.StartsWith("0X", StringComparison.InvariantCulture))
 				return NumberLiteralKind.Hexa;
 			else if (value.Contains(".") || value.Contains("e") || value.Contains("E"))

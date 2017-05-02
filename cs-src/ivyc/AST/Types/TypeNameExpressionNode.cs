@@ -1,18 +1,13 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public class TypeNameExpressionNode : TypeExpressionNode {
-		protected TypeNameExpressionNode() {
+		public TypeNameExpressionNode(SourceLocation location, string name) : base(location)
+		{
+			Name = name;
 		}
 
 		public string Name { get; private set; }
-
-		public TypeNameExpressionNode Create(string name) {
-			if (name == null)
-				throw new ArgumentNullException(nameof(name));
-
-			return new TypeNameExpressionNode() {
-				Name = name
-			};
-		}
 	}
 }

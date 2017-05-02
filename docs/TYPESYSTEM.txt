@@ -1,0 +1,45 @@
+data PrimitiveType      = Int8 | Int16 | Int32 | Int64 | UInt8 | UInt16 | UInt32 | UInt64 | Float | Double | Real | Boolean | Char8 | Char16 | Char32
+data ArraySpecification = OneElement | ManyElements(uint) | Flexible
+data(flags) StructFlags = Packed | DefaultInit
+
+data StructField = {
+                       Name      :: String
+                       Type      :: ConstShared<ProperType>
+                       Alignment :: uint?
+                       Array     :: ArraySpecification
+                   }
+
+data ClassMember = Function(Name :: [char], ProperType)
+
+data ProperType   = Primitive(PrimitiveType, Size :: uint, Alignment :: uint)
+                    Pointer  (ProperType.ConstShared) 
+                    Struct   (Symbol.Shared, [], [StructField], StructFlags)
+                    Union    (Symbol.Shared, [StructField], UnionFlags)
+                    Enum     (Symbol.Shared, [NamedConstructor], EnumFlags)
+data ClassType    = Class    (Symbol.Shared, [ClassMember], ClassFlags)
+data InstanceType = Instance (Symbol.Shared, ClassType.ConstShared)
+
+let Int8Type  = Proper(Primitive(Int8,  1, 1))
+let Int16Type = Proper(Primitive(Int16, 2, 2))
+
+data Type = Proper(ProperType.ConstShared) | Class(ClassType.ConstShared) | Instance(InstanceType.ConstShared)
+
+def Kind(let& T :: ConstShared<Type>) -> Kind
+
+class TypeConstructor<C>:
+    extension C:
+        let ParameterCount -> uint
+        let ParameterKind(uint) -> let Kind&
+        let ReturnKind() -> let Kind&
+        let Construct([Type]) -> Type
+
+data KindParameter = Independent(Id :: uint, Kind) | Dependent(uint)
+
+data Kind = Type
+            Class
+            TypeConstructor ([KindParameter])
+            ClassConstructor([KindParameter])
+            Constructed<C, C.TypeConstructor>(C.ConstShared, [KindParameter])
+
+//<A :: *, Equatable<A, List<A>>> -> *
+TypeConstructor([Independent(0, Type), Constructed(EquatableConstructor, [Dependent(0), Constructed(ListConstructor, [Dependent(0)])])])

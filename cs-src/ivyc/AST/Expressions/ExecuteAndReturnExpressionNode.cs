@@ -1,7 +1,12 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public class ExecuteAndReturnExpressionNode : ExpressionNode {
-		private ExecuteAndReturnExpressionNode() {
+		public ExecuteAndReturnExpressionNode(SourceLocation location, ExpressionNode execute, ExpressionNode @return) : base(location)
+		{
+			Execute = execute;
+			Return = @return;
 		}
 
 		public ExpressionNode Execute { get; private set; }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using ivyc.Basic;
+using System.Linq;
 namespace ivyc.AST {
 	/// <summary>
 	/// The accessibility of a declaration. Can be public, private, internal or have no accesibility at all.
@@ -27,7 +29,9 @@ namespace ivyc.AST {
 	}
 
 	public abstract class DeclarationNode : Node {
-		protected DeclarationNode() {
+		protected DeclarationNode(SourceLocation location, DeclarationAccessibility accessibility, IEnumerable<DeclarationAnnotationNode> annotations) : base(location) {
+			this.Accessibility = accessibility;
+			this.Annotations = annotations?.ToList().AsReadOnly();
 		}
 
 		/// <summary>

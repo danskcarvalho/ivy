@@ -1,8 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public class SimplePatternNode : PatternNode {
-		private SimplePatternNode() {
+		public SimplePatternNode(SourceLocation location, bool isLet, bool isVolatile, RefKind @ref, string name, TypeExpressionNode typeAnnotation) : base(location)
+		{
+			IsLet = isLet;
+			IsVolatile = isVolatile;
+			Ref = @ref;
+			Name = name;
+			TypeAnnotation = typeAnnotation;
 		}
 
 		public bool IsLet { get; private set; }

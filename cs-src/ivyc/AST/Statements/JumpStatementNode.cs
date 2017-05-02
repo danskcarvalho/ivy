@@ -1,13 +1,18 @@
 ﻿using System;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public enum JumpStatementKind {
 		//not supported on prototype
-		//Goto,
+		Goto,
 		Continue,
 		Break
 	}
 	public class JumpStatementNode : StatementNode {
-		private JumpStatementNode() {
+		public JumpStatementNode(SourceLocation location, string labelName, JumpStatementKind kind) : base(location)
+		{
+			LabelName = labelName;
+			Kind = kind;
 		}
 
 		public string LabelName { get; set; }

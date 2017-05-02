@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using ivyc.Basic;
+
 namespace ivyc.AST {
 	public enum NewBehavior {
 		//Throws,	//throw if fail to allocate		(new! type)
@@ -8,7 +11,14 @@ namespace ivyc.AST {
 		Stack		//allocate from stack... undefined behavior if fail to allocate (stacknew type)
 	}
 	public class NewExpressionNode : ExpressionNode {
-		private NewExpressionNode() {
+		public NewExpressionNode(SourceLocation location, NewBehavior behavior, bool isConstNew, bool isVolatileNew, TypeExpressionNode type, IEnumerable<ExpressionNode> initArguments, ExpressionNode arraySizeArgument) : base(location)
+		{
+			Behavior = behavior;
+			IsConstNew = isConstNew;
+			IsVolatileNew = isVolatileNew;
+			Type = type;
+			InitArguments = initArguments?.ToList().AsReadOnly();
+			ArraySizeArgument = arraySizeArgument;
 		}
 
 		public NewBehavior Behavior { get; private set; }
