@@ -14,7 +14,7 @@ namespace ivyc.Basic {
 		UInt64,
 		Float,
 		Double,
-		LongDouble,
+		Real,
 		Quad
 	}
 	public static class NumberKindExtensions {
@@ -44,7 +44,7 @@ namespace ivyc.Basic {
 				case NumberKind.Int64:
 				case NumberKind.Float:
 				case NumberKind.Double:
-				case NumberKind.LongDouble:
+				case NumberKind.Real:
 				case NumberKind.Quad:
 					return true;
 				default:
@@ -108,9 +108,9 @@ namespace ivyc.Basic {
 					return 32;
 				case NumberKind.Double:
 					return 64;
-				case NumberKind.LongDouble:
+				case NumberKind.Real:
 				case NumberKind.Quad:
-					switch (kind == NumberKind.LongDouble ? semantics.LongDoubleSemantics : semantics.QuadSemantics) {
+					switch (kind == NumberKind.Real ? semantics.LongDoubleSemantics : semantics.QuadSemantics) {
 						case FloatSemantics.IEEEHalf:
 							return 16;
 						case FloatSemantics.IEEESingle:
@@ -542,7 +542,7 @@ namespace ivyc.Basic {
 
 		int CheckForLongOverflow() {
 			switch(this.Kind){
-				case NumberKind.LongDouble:
+				case NumberKind.Real:
 				case NumberKind.Quad:
 					int status;
 					LLVMAPFloatRef apFloat = LLVMExt.APFloatFromAPFloat(APFloat, APFloatSemantics.IEEEquad, out status);
@@ -562,7 +562,7 @@ namespace ivyc.Basic {
 
 		int CheckForULongOverflow() {
 			switch (this.Kind) {
-				case NumberKind.LongDouble:
+				case NumberKind.Real:
 				case NumberKind.Quad:
 					int status;
 					LLVMAPFloatRef apFloat = LLVMExt.APFloatFromAPFloat(APFloat, APFloatSemantics.IEEEquad, out status);
@@ -716,9 +716,9 @@ namespace ivyc.Basic {
 					return LLVM.FloatType();
 				case NumberKind.Double:
 					return LLVM.DoubleType();
-				case NumberKind.LongDouble:
+				case NumberKind.Real:
 				case NumberKind.Quad:
-					switch (this.Kind == NumberKind.LongDouble ? Semantics.LongDoubleSemantics : Semantics.QuadSemantics) {
+					switch (this.Kind == NumberKind.Real ? Semantics.LongDoubleSemantics : Semantics.QuadSemantics) {
 						case FloatSemantics.IEEEHalf:
 							return LLVM.HalfType();
 						case FloatSemantics.IEEESingle:
@@ -745,9 +745,9 @@ namespace ivyc.Basic {
 					return APFloatSemantics.IEEEsingle;
 				case NumberKind.Double:
 					return APFloatSemantics.IEEEdouble;
-				case NumberKind.LongDouble:
+				case NumberKind.Real:
 				case NumberKind.Quad:
-					switch (kind == NumberKind.LongDouble ? Semantics.LongDoubleSemantics : Semantics.QuadSemantics) {
+					switch (kind == NumberKind.Real ? Semantics.LongDoubleSemantics : Semantics.QuadSemantics) {
 						case FloatSemantics.IEEEHalf:
 							return APFloatSemantics.IEEEhalf;
 						case FloatSemantics.IEEESingle:

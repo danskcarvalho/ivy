@@ -116,17 +116,13 @@
     <Compile Include="AST\Types\ListTypeExpressionNode.cs" />
     <Compile Include="AST\Types\MapTypeExpressionNode.cs" />
     <Compile Include="AST\Types\SetTypeExpressionNode.cs" />
+    <Compile Include="Symbols\Symbol.cs" />
+    <Compile Include="TypeSystem\AbstractType.cs" />
+    <Compile Include="TypeSystem\PointerType.cs" />
+    <Compile Include="TypeSystem\PrimitiveType.cs" />
+    <Compile Include="TypeSystem\ProperType.cs" />
+    <Compile Include="TypeSystem\TypeId.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Basic\" />
-    <Folder Include="AST\" />
-    <Folder Include="AST\Kinds\" />
-    <Folder Include="AST\Types\" />
-    <Folder Include="AST\Expressions\" />
-    <Folder Include="AST\Patterns\" />
-    <Folder Include="AST\Statements\" />
-    <Folder Include="AST\Declarations\" />
-    <Folder Include="TypeSystem" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

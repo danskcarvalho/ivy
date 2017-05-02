@@ -240,8 +240,8 @@ namespace ivyc.Basic {
 			else if (kSize == 32)
 				return NumberKind.Float;
 			else {
-				if (k1 == NumberKind.LongDouble || k2 == NumberKind.LongDouble)
-					return NumberKind.LongDouble;
+				if (k1 == NumberKind.Real || k2 == NumberKind.Real)
+					return NumberKind.Real;
 				else
 					return NumberKind.Quad;
 			}

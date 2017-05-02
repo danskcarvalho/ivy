@@ -1,4 +1,3 @@
-data PrimitiveType      = Int8 | Int16 | Int32 | Int64 | UInt8 | UInt16 | UInt32 | UInt64 | Float | Double | Real | Boolean | Char8 | Char16 | Char32
 data ArraySpecification = OneElement | ManyElements(uint) | Flexible
 data(flags) StructFlags = Packed | DefaultInit
 
@@ -9,15 +8,16 @@ data StructField = {
                        Array     :: ArraySpecification
                    }
 
-data ClassMember = Function(Name :: [char], ProperType)
+data ClassMember = Function(Name :: [char], ProperType.ConstShared)
 
-data ProperType   = Primitive(PrimitiveType, Size :: uint, Alignment :: uint)
-                    Pointer  (ProperType.ConstShared) 
-                    Struct   (Symbol.Shared, [], [StructField], StructFlags)
-                    Union    (Symbol.Shared, [StructField], UnionFlags)
-                    Enum     (Symbol.Shared, [NamedConstructor], EnumFlags)
-data ClassType    = Class    (Symbol.Shared, [ClassMember], ClassFlags)
-data InstanceType = Instance (Symbol.Shared, ClassType.ConstShared)
+data TypeId = TypeId(Symbol*, [TypeId])
+
+data ProperType   = Primitive(TypeId, Size :: uint, Alignment :: uint)
+                    Struct   (TypeId, [StructField], StructFlags)
+                    Union    (TypeId, [StructField], UnionFlags)
+                    Enum     (TypeId, [NamedConstructor], EnumFlags)
+data ClassType    = Class    (TypeId, [ClassMember], ClassFlags)
+data InstanceType = Instance (TypeId, ClassType.ConstShared)
 
 let Int8Type  = Proper(Primitive(Int8,  1, 1))
 let Int16Type = Proper(Primitive(Int16, 2, 2))
@@ -32,6 +32,7 @@ class TypeConstructor<C>:
         let ParameterKind(uint) -> let Kind&
         let ReturnKind() -> let Kind&
         let Construct([Type]) -> Type
+        let TypeConstructorKind() -> Kind
 
 data KindParameter = Independent(Id :: uint, Kind) | Dependent(uint)
 
