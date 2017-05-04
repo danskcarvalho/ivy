@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ivyc.TypeSystem
+namespace ivyc.Kinds
 {
-    public abstract class ProperType : IvyType
+    public class TypePart
     {
     }
 }

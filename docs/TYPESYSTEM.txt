@@ -1,46 +1,20 @@
-data ArraySpecification = OneElement | ManyElements(uint) | Flexible
-data(flags) StructFlags = Packed | DefaultInit
 
-data StructField = {
-                       Name      :: String
-                       Type      :: ConstShared<ProperType>
-                       Alignment :: uint?
-                       Array     :: ArraySpecification
-                   }
+data TypeName = Reference(uint) | Symbol(S :: const Symbol*) where S != null
+data Type = TypeName(TypeName, P :: [const Type*]) where P.All(X => X != null)
+            Function(FunctionOptions, [Kind], [FunctionParameter], FunctionParameter)
 
-data ClassMember = Function(Name :: [char], ProperType.ConstShared)
-
-data TypeId = TypeId(Symbol*, [TypeId])
-
-data ProperType   = Primitive(TypeId, Size :: uint, Alignment :: uint)
-                    Struct   (TypeId, [StructField], StructFlags)
-                    Union    (TypeId, [StructField], UnionFlags)
-                    Enum     (TypeId, [NamedConstructor], EnumFlags)
-data ClassType    = Class    (TypeId, [ClassMember], ClassFlags)
-data InstanceType = Instance (TypeId, ClassType.ConstShared)
-
-let Int8Type  = Proper(Primitive(Int8,  1, 1))
-let Int16Type = Proper(Primitive(Int16, 2, 2))
-
-data Type = Proper(ProperType.ConstShared) | Class(ClassType.ConstShared) | Instance(InstanceType.ConstShared)
-
-def Kind(let& T :: ConstShared<Type>) -> Kind
-
-class TypeConstructor<C>:
-    extension C:
-        let ParameterCount -> uint
-        let ParameterKind(uint) -> let Kind&
-        let ReturnKind() -> let Kind&
-        let Construct([Type]) -> Type
-        let TypeConstructorKind() -> Kind
-
-data KindParameter = Independent(Id :: uint, Kind) | Dependent(uint)
-
-data Kind = Type
-            Class
-            TypeConstructor ([KindParameter])
-            ClassConstructor([KindParameter])
-            Constructed<C, C.TypeConstructor>(C.ConstShared, [KindParameter])
-
-//<A :: *, Equatable<A, List<A>>> -> *
-TypeConstructor([Independent(0, Type), Constructed(EquatableConstructor, [Dependent(0), Constructed(ListConstructor, [Dependent(0)])])])
+data FunctionCallingConvention = IvyCall | CCall 
+data FunctionArgumentRef = Copy | Ref | Move          
+data FunctionOptions = {
+                          CallingConvention :: FunctionCallingConvention
+                       }
+data FunctionParameter = {
+                            IsLet :: bool
+                            IsVolatile :: bool
+                            Ref :: FunctionArgumentRef
+                            Type :: const Type*
+                         }        
+data Kind = Proper(Id :: uint?) | Class(Id :: uint?)
+            Constructor(Kind, [Kind], Kind) | Type(const Type*) //<A :: *, Equatable<A>> -> * => 
+                                                                //   Constructor(Proper(0), 
+                                                                //       [Type(&[TypeName(Symbol(EquatableSymbol), [&[Reference(0)]])])], Proper(0))

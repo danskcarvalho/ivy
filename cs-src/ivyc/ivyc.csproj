@@ -37,6 +37,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Kinds\TypePart.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Basic\SourceLocation.cs" />
@@ -51,7 +52,7 @@
     <Compile Include="AST\Kinds\KindExpressionNode.cs" />
     <Compile Include="AST\Kinds\SimpleKindExpressionNode.cs" />
     <Compile Include="AST\Types\DotTypeExpressionNode.cs" />
-    <Compile Include="AST\Types\FunctionTypeExpressionASTNode.cs" />
+    <Compile Include="AST\Types\FunctionTypeExpressionNode.cs" />
     <Compile Include="AST\Types\NullableTypeExpressionNode.cs" />
     <Compile Include="AST\Types\PointerTypeExpressionNode.cs" />
     <Compile Include="AST\Types\PolyTypeExpressionNode.cs" />
@@ -117,15 +118,6 @@
     <Compile Include="AST\Types\MapTypeExpressionNode.cs" />
     <Compile Include="AST\Types\SetTypeExpressionNode.cs" />
     <Compile Include="Symbols\Symbol.cs" />
-    <Compile Include="TypeSystem\ITypeConstructor.cs" />
-    <Compile Include="TypeSystem\IvyType.cs" />
-    <Compile Include="TypeSystem\EnumType.cs" />
-    <Compile Include="TypeSystem\NamedValueTypeConstructor.cs" />
-    <Compile Include="TypeSystem\PrimitiveType.cs" />
-    <Compile Include="TypeSystem\ProperType.cs" />
-    <Compile Include="TypeSystem\StructType.cs" />
-    <Compile Include="TypeSystem\TypeId.cs" />
-    <Compile Include="TypeSystem\UnionType.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

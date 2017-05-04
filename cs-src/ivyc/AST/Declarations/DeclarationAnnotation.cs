@@ -227,6 +227,8 @@ namespace ivyc.AST {
 		/// Name of this annotation.
 		/// </summary>
 		public DeclarationAnnotationName Name { get; private set; }
+        // Ex.: data(!valuetype) Nullable<T> = Some(T) | None
+        public bool IsNegated { get; set; }
 		/// <summary>
 		/// Arguments of this annotation.
 		/// </summary>
