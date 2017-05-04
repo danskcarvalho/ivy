@@ -117,11 +117,15 @@
     <Compile Include="AST\Types\MapTypeExpressionNode.cs" />
     <Compile Include="AST\Types\SetTypeExpressionNode.cs" />
     <Compile Include="Symbols\Symbol.cs" />
-    <Compile Include="TypeSystem\AbstractType.cs" />
-    <Compile Include="TypeSystem\PointerType.cs" />
+    <Compile Include="TypeSystem\ITypeConstructor.cs" />
+    <Compile Include="TypeSystem\IvyType.cs" />
+    <Compile Include="TypeSystem\EnumType.cs" />
+    <Compile Include="TypeSystem\NamedValueTypeConstructor.cs" />
     <Compile Include="TypeSystem\PrimitiveType.cs" />
     <Compile Include="TypeSystem\ProperType.cs" />
+    <Compile Include="TypeSystem\StructType.cs" />
     <Compile Include="TypeSystem\TypeId.cs" />
+    <Compile Include="TypeSystem\UnionType.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

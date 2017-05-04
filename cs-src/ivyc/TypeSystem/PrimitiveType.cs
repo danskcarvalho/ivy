@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ivyc.TypeSystem
 {
-    public class PrimitiveType
+    public class PrimitiveType : ProperType
     {
-        public TypeId TypeId { get; private set; }
-        public ulong Size { get; private set; }
-        public ulong Alignment { get; private set; }
+        public TypeId TypeId { get; }
+        public ulong Size { get; }
+        public ulong Alignment { get; }
     }
 }

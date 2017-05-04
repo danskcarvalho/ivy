@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ivyc.TypeSystem
 {
-    public abstract class AbstractType
+    public abstract class IvyType
     {
     }
 }
