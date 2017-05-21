@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Kinds\FunctionTypeId.cs" />
+    <Compile Include="Kinds\Kind.cs" />
     <Compile Include="Kinds\NamedTypeId.cs" />
     <Compile Include="Kinds\TypeId.cs" />
     <Compile Include="Kinds\TypePart.cs" />

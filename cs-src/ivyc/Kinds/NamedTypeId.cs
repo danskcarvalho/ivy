@@ -32,7 +32,7 @@ namespace ivyc.Kinds
             return other.TypePart == this.TypePart && CompareArguments(this.Arguments, other.Arguments);
         }
 
-        private bool CompareArguments(IReadOnlyList<NamedTypeId> a1, IReadOnlyList<NamedTypeId> a2)
+        private static bool CompareArguments(IReadOnlyList<NamedTypeId> a1, IReadOnlyList<NamedTypeId> a2)
         {
             if (a1 == null && a2 == null)
                 return false;
@@ -56,11 +56,9 @@ namespace ivyc.Kinds
         {
             var hashCode = 31;
             hashCode = (hashCode * 37) ^ TypePart.GetHashCode();
-            if(Arguments != null)
-            {
-                for (int i = 0; i < Arguments.Count; i++)
-                    hashCode = (hashCode * 37) ^ Arguments[i].GetHashCode();
-            }
+            if (Arguments == null) return hashCode;
+            for (int i = 0; i < Arguments.Count; i++)
+                hashCode = (hashCode * 37) ^ Arguments[i].GetHashCode();
             return hashCode;
         }
     }
