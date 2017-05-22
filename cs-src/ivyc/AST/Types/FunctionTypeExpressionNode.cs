@@ -16,17 +16,17 @@ namespace ivyc.AST {
 	}
 
 	public class FunctionArgumentNode : Node {
-		public FunctionArgumentNode(SourceLocation location, TypeExpressionNode argument, bool isLet, bool isVolatile, RefKind @ref) : base(location)
+		public FunctionArgumentNode(SourceLocation location, TypeExpressionNode argument, bool isLet, bool isUnstable, RefKind @ref) : base(location)
 		{
 			Argument = argument;
 			IsLet = isLet;
-			IsVolatile = isVolatile;
+			IsUnstable = isUnstable;
 			Ref = @ref;
 		}
 
 		public TypeExpressionNode Argument { get; private set; }
 		public bool IsLet { get; private set; }
-		public bool IsVolatile { get; private set; }
+		public bool IsUnstable { get; private set; }
 		public RefKind Ref { get; private set; }
 	}
 

@@ -45,32 +45,32 @@ namespace ivyc.AST {
 		public IReadOnlyList<LambdaCapturedVarNode> CapturedVars { get; private set; }
 	}
 	public class LambdaArgumentNode : Node {
-		public LambdaArgumentNode(SourceLocation location, string name, bool isLet, bool isVolatile, RefKind @ref, TypeExpressionNode type) : base(location)
+		public LambdaArgumentNode(SourceLocation location, string name, bool isLet, bool isUnstable, RefKind @ref, TypeExpressionNode type) : base(location)
 		{
 			Name = name;
 			IsLet = isLet;
-			IsVolatile = isVolatile;
+			IsUnstable = isUnstable;
 			Ref = @ref;
 			Type = type;
 		}
 
 		public string Name { get; private set; }
 		public bool IsLet { get; private set; }
-		public bool IsVolatile { get; private set; }
+		public bool IsUnstable { get; private set; }
 		public RefKind Ref { get; private set; }
 		public TypeExpressionNode Type { get; private set; }
 	}
 	public class LambdaResultNode : Node {
-		public LambdaResultNode(SourceLocation location, bool isLet, bool isVolatile, RefKind @ref, TypeExpressionNode type) : base(location)
+		public LambdaResultNode(SourceLocation location, bool isLet, bool isUnstable, RefKind @ref, TypeExpressionNode type) : base(location)
 		{
 			IsLet = isLet;
-			IsVolatile = isVolatile;
+			IsUnstable = isUnstable;
 			Ref = @ref;
 			Type = type;
 		}
 
 		public bool IsLet { get; private set; }
-		public bool IsVolatile { get; private set; }
+		public bool IsUnstable { get; private set; }
 		public RefKind Ref { get; private set; }
 		public TypeExpressionNode Type { get; private set; }
 	}

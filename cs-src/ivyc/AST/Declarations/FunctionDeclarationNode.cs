@@ -5,11 +5,11 @@ using System.Linq;
 namespace ivyc.AST {
 
 	public class FunctionDeclarationArgumentNode : Node {
-		public FunctionDeclarationArgumentNode(SourceLocation location, string name, TypeExpressionNode type, bool isLet, bool isVolatile, RefKind @ref, ExpressionNode defaultValue) : base(location) {
+		public FunctionDeclarationArgumentNode(SourceLocation location, string name, TypeExpressionNode type, bool isLet, bool isUnstable, RefKind @ref, ExpressionNode defaultValue) : base(location) {
 			Name = name;
 			Type = type;
 			IsLet = isLet;
-			IsVolatile = isVolatile;
+			IsUnstable = isUnstable;
 			this.Ref = @ref;
 			DefaultValue = defaultValue;
 		}
@@ -17,7 +17,7 @@ namespace ivyc.AST {
 		public string Name { get; private set; }
 		public TypeExpressionNode Type { get; private set; }
 		public bool IsLet { get; private set; }
-		public bool IsVolatile { get; private set; }
+		public bool IsUnstable { get; private set; }
 		public RefKind Ref { get; private set; }
 		public ExpressionNode DefaultValue { get; set; }
 	}
@@ -32,11 +32,11 @@ namespace ivyc.AST {
 	}
 
 	public class FunctionDeclarationNode : DeclarationNode {
-		public FunctionDeclarationNode(SourceLocation location, DeclarationAccessibility accessibility, IEnumerable<DeclarationAnnotationNode> annotations, CallingConvention callingConvention, Name name, bool isLet, bool isVolatile, RefKind @ref, IEnumerable<DeclarationTypeArgumentNode> typeArguments, IEnumerable<FunctionDeclarationArgumentNode> arguments, FunctionTypeArgumentNode result, DeclarationBodyNode body, IEnumerable<FunctionDeclarationWhereClauseNode> whereClauses) : base(location, accessibility, annotations) {
+		public FunctionDeclarationNode(SourceLocation location, DeclarationAccessibility accessibility, IEnumerable<DeclarationAnnotationNode> annotations, CallingConvention callingConvention, Name name, bool isLet, bool isUnstable, RefKind @ref, IEnumerable<DeclarationTypeArgumentNode> typeArguments, IEnumerable<FunctionDeclarationArgumentNode> arguments, FunctionTypeArgumentNode result, DeclarationBodyNode body, IEnumerable<FunctionDeclarationWhereClauseNode> whereClauses) : base(location, accessibility, annotations) {
 			CallingConvention = callingConvention;
 			Name = name;
 			IsLet = isLet;
-			IsVolatile = isVolatile;
+			IsUnstable = isUnstable;
 			this.Ref = @ref;
 			TypeArguments = typeArguments?.ToList().AsReadOnly();
 			Arguments = arguments?.ToList().AsReadOnly();
@@ -48,7 +48,7 @@ namespace ivyc.AST {
 		public CallingConvention CallingConvention { get; private set; }
 		public Name Name { get; private set; }
 		public bool IsLet { get; private set; }
-		public bool IsVolatile { get; private set; }
+		public bool IsUnstable { get; private set; }
 		//not supported in prototype
 		//Ex.: async def ReadFile() -> Task<List<String>>
 		//public bool IsAsync { get; set; }
@@ -66,6 +66,6 @@ namespace ivyc.AST {
         //Ex.: let Element(Index :: uint) => self.MData[Index]
         //Ex.: var Normalize() => self.X /= self.Length; self.Y /= self.Length
 		//Ex.: def init() where vBuffer(null), vCount(0) = default
-        //Ex.: volatile SomeFunction()
+        //Ex.: unstable SomeFunction()
 	}
 }

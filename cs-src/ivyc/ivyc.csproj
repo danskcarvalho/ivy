@@ -37,11 +37,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Kinds\FunctionTypeId.cs" />
+    <Compile Include="Kinds\ClassType.cs" />
+    <Compile Include="Kinds\FunctionType.cs" />
+    <Compile Include="Kinds\InstanceType.cs" />
     <Compile Include="Kinds\Kind.cs" />
-    <Compile Include="Kinds\NamedTypeId.cs" />
-    <Compile Include="Kinds\TypeId.cs" />
-    <Compile Include="Kinds\TypePart.cs" />
+    <Compile Include="Kinds\PolyVarType.cs" />
+    <Compile Include="Kinds\ProperConstructedType.cs" />
+    <Compile Include="Kinds\ProperType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Basic\SourceLocation.cs" />

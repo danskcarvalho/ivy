@@ -104,11 +104,11 @@ namespace ivyc.AST {
 	}
 
 	public class StructFieldDeclarationNode : Node {
-		public StructFieldDeclarationNode(Basic.SourceLocation location, string name, TypeExpressionNode type, bool isLet, bool isVolatile, RefKind @ref, IEnumerable<ExpressionNode> indexes, ExpressionNode defaultValue, DeclarationAccessibility accessibility, IEnumerable<DeclarationAnnotationNode> annotations) : base(location) {
+		public StructFieldDeclarationNode(Basic.SourceLocation location, string name, TypeExpressionNode type, bool isLet, bool isUnstable, RefKind @ref, IEnumerable<ExpressionNode> indexes, ExpressionNode defaultValue, DeclarationAccessibility accessibility, IEnumerable<DeclarationAnnotationNode> annotations) : base(location) {
 			Name = name;
 			Type = type;
 			IsLet = isLet;
-			IsVolatile = isVolatile;
+			IsUnstable = isUnstable;
 			this.Ref = @ref;
 			Indexes = indexes?.ToList().AsReadOnly();
 			DefaultValue = defaultValue;
@@ -119,7 +119,7 @@ namespace ivyc.AST {
 		public string Name { get; private set; }
 		public TypeExpressionNode Type { get; private set; }
 		public bool IsLet { get; private set; }
-		public bool IsVolatile { get; private set; }
+		public bool IsUnstable { get; private set; }
 		public RefKind Ref { get; private set; }
         /// <summary>
         /// Ex.: let Path :: char[256]
@@ -149,11 +149,11 @@ namespace ivyc.AST {
 	}
 
 	public class NamedConstructorArgumentNode : Node {
-		public NamedConstructorArgumentNode(Basic.SourceLocation location, TypeExpressionNode type, string name, bool isLet, bool isVolatile, RefKind @ref, IEnumerable<ExpressionNode> indexes, ExpressionNode defaultValue) : base(location) {
+		public NamedConstructorArgumentNode(Basic.SourceLocation location, TypeExpressionNode type, string name, bool isLet, bool isUnstable, RefKind @ref, IEnumerable<ExpressionNode> indexes, ExpressionNode defaultValue) : base(location) {
 			Type = type;
 			Name = name;
 			IsLet = isLet;
-			IsVolatile = isVolatile;
+			IsUnstable = isUnstable;
 			this.Ref = @ref;
 			Indexes = indexes?.ToList().AsReadOnly();
 			DefaultValue = defaultValue;
@@ -162,7 +162,7 @@ namespace ivyc.AST {
 		public TypeExpressionNode Type { get; private set; }
 		public string Name { get; private set; }
 		public bool IsLet { get; private set; }
-		public bool IsVolatile { get; private set; }
+		public bool IsUnstable { get; private set; }
 		public RefKind Ref { get; private set; }
 		//Ex.: TreeValue(char[256])
 		public IReadOnlyList<ExpressionNode> Indexes { get; private set; }

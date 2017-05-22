@@ -15,12 +15,12 @@ namespace ivyc.AST {
 		public PatternNode Pattern { get; private set; }
 	}
 	public class StructPatternNode : PatternNode {
-		public StructPatternNode(SourceLocation location, IEnumerable<StructPatternElementNode> innerPatterns, string name, bool isLet, bool isVolatile, RefKind @ref, TypeExpressionNode typeAnnotation, TailPosition? tailPosition) : base(location)
+		public StructPatternNode(SourceLocation location, IEnumerable<StructPatternElementNode> innerPatterns, string name, bool isLet, bool isUnstable, RefKind @ref, TypeExpressionNode typeAnnotation, TailPosition? tailPosition) : base(location)
 		{
 			InnerPatterns = innerPatterns?.ToList().AsReadOnly();
 			Name = name;
 			IsLet = isLet;
-			IsVolatile = isVolatile;
+			IsUnstable = isUnstable;
 			Ref = @ref;
 			TypeAnnotation = typeAnnotation;
 			TailPosition = tailPosition;
@@ -29,7 +29,7 @@ namespace ivyc.AST {
 		public IReadOnlyList<StructPatternElementNode> InnerPatterns { get; private set; }
 		public string Name { get; private set; }
 		public bool IsLet { get; private set; }
-		public bool IsVolatile { get; private set; }
+		public bool IsUnstable { get; private set; }
 		public RefKind Ref { get; private set; }
 		public TypeExpressionNode TypeAnnotation { get; private set; }
 		public TailPosition? TailPosition { get; private set; }

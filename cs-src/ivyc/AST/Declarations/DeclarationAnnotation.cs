@@ -133,12 +133,12 @@ namespace ivyc.AST {
 		/// </summary>
 		Explicit,
 		/// <summary>
-		/// Applied to a field of a struct. Changes the way field mutators/accessors are generated. It means a field of a const
+		/// Applied to a field of a struct. Changes the way field mutators/accessors are generated. It means a field of a const/let
 		/// struct can still be mutated.
 		/// </summary>
 		Mutable,
 		/// <summary>
-		/// Applied to a field of a struct. Changes the way field mutators/accessors are generated. It means a field of a volatile
+		/// Applied to a field of a struct. Changes the way field mutators/accessors are generated. It means a field of a volatile/unstable
 		/// struct can still be accessed as non volatile data.
 		/// </summary>
 		Definite,

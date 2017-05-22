@@ -9,10 +9,10 @@ namespace ivyc.AST {
 		AtEnd
 	}
 	public class ConstructorPatternNode : PatternNode {
-		public ConstructorPatternNode(SourceLocation location, bool isLet, bool isVolatile, RefKind @ref, string moduleName, string constructorName, IEnumerable<string> typePatterns, IEnumerable<PatternNode> valuePatterns, TypeExpressionNode typeAnnotation, string name, TailPosition? tailPosition) : base(location)
+		public ConstructorPatternNode(SourceLocation location, bool isLet, bool isUnstable, RefKind @ref, string moduleName, string constructorName, IEnumerable<string> typePatterns, IEnumerable<PatternNode> valuePatterns, TypeExpressionNode typeAnnotation, string name, TailPosition? tailPosition) : base(location)
 		{
 			IsLet = isLet;
-			IsVolatile = isVolatile;
+			IsUnstable = isUnstable;
 			Ref = @ref;
 			ModuleName = moduleName;
 			ConstructorName = constructorName;
@@ -24,7 +24,7 @@ namespace ivyc.AST {
 		}
 
 		public bool IsLet { get; private set; }
-		public bool IsVolatile { get; private set; }
+		public bool IsUnstable { get; private set; }
 		public RefKind Ref { get; private set; }
 
 		public string ModuleName { get; private set; }

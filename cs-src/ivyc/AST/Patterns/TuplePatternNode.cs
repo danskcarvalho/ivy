@@ -15,12 +15,12 @@ namespace ivyc.AST {
 		public PatternNode Right { get; private set; }
 	}
 	public class TuplePatternNode : PatternNode {
-		public TuplePatternNode(SourceLocation location, TupleKind tupleKind, string name, bool isLet, bool isVolatile, bool isPointer, RefKind @ref, IEnumerable<TupleElementPatternNode> innerPatterns, TypeExpressionNode typeAnnotation, TailPosition? tailPosition) : base(location)
+		public TuplePatternNode(SourceLocation location, TupleKind tupleKind, string name, bool isLet, bool isUnstable, bool isPointer, RefKind @ref, IEnumerable<TupleElementPatternNode> innerPatterns, TypeExpressionNode typeAnnotation, TailPosition? tailPosition) : base(location)
 		{
 			TupleKind = tupleKind;
 			Name = name;
 			IsLet = isLet;
-			IsVolatile = isVolatile;
+			IsUnstable = isUnstable;
 			IsPointer = isPointer;
 			Ref = @ref;
 			InnerPatterns = innerPatterns?.ToList().AsReadOnly();
@@ -31,7 +31,7 @@ namespace ivyc.AST {
 		public TupleKind TupleKind { get; private set; }
 		public string Name { get; private set; }
 		public bool IsLet { get; private set; }
-		public bool IsVolatile { get; private set; }
+		public bool IsUnstable { get; private set; }
 		public bool IsPointer { get; private set; }
 		public RefKind Ref { get; private set; }
 		public IReadOnlyList<TupleElementPatternNode> InnerPatterns { get; private set; }
