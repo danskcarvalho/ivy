@@ -14,5 +14,14 @@ namespace ivyc.Kinds
     {
         public Symbol Head { get; }
         public IReadOnlyList<Symbol> Arguments { get; }
+
+        public ClassType(Symbol head, IEnumerable<Symbol> arguments)
+        {
+            if (head == null)
+                throw new ArgumentNullException(nameof(head));
+
+            this.Head = head;
+            this.Arguments = arguments?.ToList().AsReadOnly();
+        }
     }
 }

@@ -41,7 +41,6 @@
     <Compile Include="Kinds\FunctionType.cs" />
     <Compile Include="Kinds\InstanceType.cs" />
     <Compile Include="Kinds\Kind.cs" />
-    <Compile Include="Kinds\PolyVarType.cs" />
     <Compile Include="Kinds\ProperConstructedType.cs" />
     <Compile Include="Kinds\ProperType.cs" />
     <Compile Include="Program.cs" />

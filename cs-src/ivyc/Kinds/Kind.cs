@@ -36,6 +36,14 @@ namespace ivyc.Kinds
         /// This type must have kind class
         /// </summary>
         public ClassType ClassType { get; }
+
+        public ConstructedClassKind(ClassType classType)
+        {
+            if (classType == null)
+                throw new ArgumentNullException(nameof(classType));
+
+            this.ClassType = classType;
+        }
     }
 
     public abstract class ConstructorKindArgument
@@ -45,12 +53,50 @@ namespace ivyc.Kinds
     public class IndependentConstructorKindArgument : ConstructorKindArgument
     {
         public Kind Argument { get; }
+
+        public IndependentConstructorKindArgument(Kind argument)
+        {
+            if (argument == null)
+                throw new ArgumentNullException(nameof(argument));
+
+            this.Argument = argument;
+        }
     }
 
     public class DependentConstructorKindArgument : ConstructorKindArgument
     {
-        public Kind Argument { get; }
+        public ConstructorKind Argument { get; }
         public IReadOnlyList<int> Dependencies { get; }
+
+        public DependentConstructorKindArgument(ConstructorKind argument, IEnumerable<int> dependencies)
+        {
+            if (argument == null)
+                throw new ArgumentNullException(nameof(argument));
+            this.Argument = argument;
+            this.Dependencies = dependencies?.ToList().AsReadOnly();
+
+            if (this.Dependencies.Count == 0)
+                throw new ArgumentException("must have dependencies");
+
+            if (!IsSorted(this.Dependencies))
+                throw new ArgumentException("dependencies must be sorted");
+
+            if (Argument.Arguments.Count <= Dependencies.Count)
+                throw new ArgumentException("invalid constructor");
+
+            if (!AllUsed(Argument, Dependencies.Count))
+                throw new ArgumentException("invalid constructor");
+        }
+
+        private bool AllUsed(ConstructorKind argument, int count)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static bool IsSorted(IReadOnlyList<int> dependencies)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class DependentConstructedTypeConstructorKindArgument : ConstructorKindArgument
